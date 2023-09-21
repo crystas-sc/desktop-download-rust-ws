@@ -1,4 +1,4 @@
-# Native decryption with encrypted large web downloads
+# Native decryption of encrypted large web downloads
 
 ##Usage
 ```
