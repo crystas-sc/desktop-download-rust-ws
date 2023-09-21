@@ -1,6 +1,10 @@
 # Native decryption of encrypted large web downloads
 
-##Usage
+## Tech Stack
+* Rust
+* Websockets
+* AEAD ecryption
+## Usage
 ```
 cargo build
 cargo run
