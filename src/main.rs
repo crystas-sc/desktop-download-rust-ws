@@ -7,7 +7,11 @@ use actix_web::{middleware, web, App, Error, HttpRequest, HttpResponse, HttpServ
 use actix_web_actors::ws;
 
 mod server;
+mod endecrypt_file;
+
 use self::server::MyWebSocket;
+
+
 
 async fn index() -> impl Responder {
     NamedFile::open_async("./static/index.html").await.unwrap()

@@ -1,35 +1,18 @@
-# websocket
+# Native decryption with encrypted large web downloads
 
-Simple echo websocket server.
+##Usage
+```
+cargo build
+cargo run
 
-## Usage
-
-### server
-
-```sh
-cd websockets/echo
-cargo run --bin websocket-server
-# Started http server: 127.0.0.1:8080
+# Run simple static web server
+cd sample_server
+python -n http.server
 ```
 
-### web client
+## Reference
+https://kerkour.com/rust-file-encryption
+https://github.com/skerkour/kerkour.com/blob/main/blog/2021/rust_file_encryption/src/main.rs
+https://www.imperialviolet.org/2015/05/16/aeads.html
 
-- [http://localhost:8080/index.html](http://localhost:8080/index.html)
 
-### rust client
-
-```sh
-cd websockets/websocket
-cargo run --bin websocket-client
-```
-
-### python client
-
-- `pip install aiohttp`
-- `python websocket-client.py`
-
-if ubuntu :
-
-- `pip3 install aiohttp`
-- `python3 websocket-client.py`
-# desktop-download-rust-ws

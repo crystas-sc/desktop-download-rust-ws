@@ -7,14 +7,14 @@ use actix_web_actors::ws;
 use std::fs;
 use std::fs::OpenOptions;
 use std::io::Write;
-
+use crate::endecrypt_file;
 
 /// How often heartbeat pings are sent
 const HEARTBEAT_INTERVAL: Duration = Duration::from_secs(5);
 
 /// How long before lack of client response causes a timeout
 const CLIENT_TIMEOUT: Duration = Duration::from_secs(10);
-
+#[derive(Debug, PartialEq, Eq)]
 enum TranserStatus{
     STARTED,
     FINISHED,
@@ -86,15 +86,19 @@ impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for MyWebSocket {
                 // let printers = printers::get_printers();
                 // println!("{:?}", printers);
                 if text.starts_with("filename:") {
+                    if self.status == TranserStatus::STARTED {
+                        ctx.text(format!("echo: {} transfer is ongoing",self.filename));
+                    }
                     let filename = text.replace("filename:","");
                     self.status =  TranserStatus::STARTED;
                     self.filename= filename;
                 } else if text.eq("finished") {
                     self.status = TranserStatus::FINISHED;
+                    let _ = endecrypt_file::decrypt_file(&self.filename);
                 }
                 
                 
-                ctx.text(format!("echo: {}",text))
+                ctx.text(format!("{}",text))
             },
             Ok(ws::Message::Binary(bin)) =>  { 
                 // let mut file = File::create("foo.txt");
